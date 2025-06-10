@@ -192,6 +192,8 @@ DR_CIRCLE = 1
 DR_BASE        = 0
 DR_TOOL        = 1
 DR_WORLD       = 2
+DR_WHITE_BOARD = 109
+DR_WHITE_BOARD2 = 110
 DR_TC_USER_MIN = 101
 DR_TC_USER_MAX = 200
 
@@ -939,8 +941,10 @@ def get_current_posx(ref=None):
         req = GetCurrentPosx.Request()  
         req.ref = _ref
 
+        g_node.get_logger().info('service call start')
         future = _ros2_get_current_posx.call_async(req)
         rclpy.spin_until_future_complete(g_node, future)
+        g_node.get_logger().info('service call done')
 
         try:
             result = future.result()
@@ -1827,8 +1831,10 @@ def _movel(pos, vel=None, acc=None, time=None, radius=None, ref=None, mod=DR_MV_
         while not _ros2_movel.wait_for_service(timeout_sec=1.0):
             g_node.get_logger().info("Service is not available, waiting for service to becom available...")
 
+        g_node.get_logger().info('[call_async] start')
         future = _ros2_movel.call_async(req)
         rclpy.spin_until_future_complete(g_node, future)
+        g_node.get_logger().info('[call_async] end')
 
         try:
             result = future.result()
