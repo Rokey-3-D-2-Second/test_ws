@@ -50,3 +50,21 @@ joint_limits:
     max_acceleration: 2.094
     min_position: -3.14  
     max_position: 3.14   
+
+  # Gripper
+
+  rg2_finger_joint1:
+    has_velocity_limits: true
+    max_velocity: 1.57     # 실제 스펙에 맞게 조정
+    has_acceleration_limits: true
+    max_acceleration: 1.0  # 실제 스펙에 맞게 조정
+    min_position: 0.0      # 실제 gripper 범위에 맞게 조정
+    max_position: 1.18     # 실제 gripper 범위에 맞게 조정
+
+  rg2_finger_joint2:
+    has_velocity_limits: true
+    max_velocity: 1.57
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+    min_position: 0.0
+    max_position: 1.18

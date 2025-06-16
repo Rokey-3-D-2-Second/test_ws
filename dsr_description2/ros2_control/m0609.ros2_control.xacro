@@ -111,7 +111,6 @@
         <state_interface name="velocity"/>
       </joint>
 
-
     </ros2_control>
 
   </xacro:macro>

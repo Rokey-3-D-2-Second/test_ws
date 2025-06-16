@@ -46,6 +46,12 @@ def rviz_node_function(context):
         .robot_description(file_path=f"config/{model_value}.urdf.xacro")
         .robot_description_semantic(file_path="config/dsr.srdf")
         .trajectory_execution(file_path="config/moveit_controllers.yaml")
+        # .sensors_3d(
+        #     file_path=os.path.join(
+        #         get_package_share_directory(package_name_str),
+        #         "config/sensors_3d.yaml",
+        #     )
+        # )
         .to_moveit_configs()
     )
     run_move_group_node = Node(
@@ -53,7 +59,9 @@ def rviz_node_function(context):
         executable="move_group",
         # namespace=LaunchConfiguration('name'),
         output="screen",
-        parameters=[moveit_config.to_dict()],
+        parameters=[
+            moveit_config.to_dict(),
+        ],
     )
 
     # RViz
@@ -81,7 +89,7 @@ def rviz_node_function(context):
 
 def generate_launch_description():
     ARGUMENTS =[ 
-        DeclareLaunchArgument('name',  default_value = '',     description = 'NAME_SPACE'     ),
+        DeclareLaunchArgument('name',  default_value = '',          description = 'NAME_SPACE'     ),
         DeclareLaunchArgument('host',  default_value = '127.0.0.1', description = 'ROBOT_IP'       ),
         DeclareLaunchArgument('port',  default_value = '12345',     description = 'ROBOT_PORT'     ),
         DeclareLaunchArgument('mode',  default_value = 'virtual',   description = 'OPERATION MODE' ),
@@ -164,20 +172,21 @@ def generate_launch_description():
         namespace=LaunchConfiguration('name'),
         output='both',
         parameters=[{
-        'robot_description': Command(['xacro', ' ', xacro_path, '/', LaunchConfiguration('model'), '.urdf.xacro color:=', LaunchConfiguration('color')])           
-    }])
+            'robot_description': Command(['xacro', ' ', xacro_path, '/', LaunchConfiguration('model'), '.urdf.xacro color:=', LaunchConfiguration('color')])           
+        }],
+    )
 
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
-        namespace=LaunchConfiguration('name'),
         executable="spawner",
+        namespace=LaunchConfiguration('name'),
         arguments=["joint_state_broadcaster", "-c", "controller_manager"],
     )
 
     robot_controller_spawner = Node(
         package="controller_manager",
-        namespace=LaunchConfiguration('name'),
         executable="spawner",
+        namespace=LaunchConfiguration('name'),
         arguments=["dsr_controller2", "-c", "controller_manager"],
     )
 
@@ -185,11 +194,14 @@ def generate_launch_description():
         package="controller_manager",
         executable="spawner",
         namespace=LaunchConfiguration('name'),
-        arguments=[
-            "dsr_moveit_controller",
-            "-c",
-            "controller_manager",
-        ],
+        arguments=["dsr_moveit_controller", "-c", "controller_manager",],
+    )
+
+    gripper_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        namespace=LaunchConfiguration('name'),
+        arguments=["gripper_controller", "-c", "controller_manager",],
     )
 
     # # Moveit2 config 
@@ -228,6 +240,7 @@ def generate_launch_description():
         delay_rviz_after_joint_state_broadcaster_spawner,
         joint_state_broadcaster_spawner,
         dsr_moveit_controller_spawner,
+        gripper_controller_spawner, 
         control_node,
     ]
 

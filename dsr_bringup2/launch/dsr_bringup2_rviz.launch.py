@@ -128,7 +128,7 @@ def generate_launch_description():
                 " mode:=", LaunchConfiguration('mode'),
                 " model:=", LaunchConfiguration('model'),
                 ]),         
-        }]
+        }],
     )
     
     rviz_node = Node(

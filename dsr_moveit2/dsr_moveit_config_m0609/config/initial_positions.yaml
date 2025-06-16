@@ -5,3 +5,5 @@ initial_positions:
   joint_4: 0.0
   joint_5: 0.0
   joint_6: 0.0
+  rg2_finger_joint1: 0.0
+  rg2_finger_joint2: 0.0

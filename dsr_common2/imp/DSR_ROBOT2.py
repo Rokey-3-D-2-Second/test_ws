@@ -1831,10 +1831,10 @@ def _movel(pos, vel=None, acc=None, time=None, radius=None, ref=None, mod=DR_MV_
         while not _ros2_movel.wait_for_service(timeout_sec=1.0):
             g_node.get_logger().info("Service is not available, waiting for service to becom available...")
 
-        g_node.get_logger().info('[call_async] start')
+        # g_node.get_logger().info('[call_async] start')
         future = _ros2_movel.call_async(req)
         rclpy.spin_until_future_complete(g_node, future)
-        g_node.get_logger().info('[call_async] end')
+        # g_node.get_logger().info('[call_async] end')
 
         try:
             result = future.result()

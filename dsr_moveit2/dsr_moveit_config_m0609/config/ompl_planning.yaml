@@ -65,7 +65,7 @@ planner_configs:
     k_constant: 0.0  # value used to normalize expresssion. default: 0.0 set in setup()
   PRM:
     type: geometric::PRM
-    max_nearest_neighbors: 10  # use k nearest neighbors. default: 10
+    max_nearest_neighbors: 10  # use nearest neighbors. default: 10
   PRMstar:
     type: geometric::PRMstar
   FMT:
@@ -165,3 +165,32 @@ manipulator:
     - SPARStwo
   projection_evaluator: joints(joint_1,joint_2)
   longest_valid_segment_fraction: 0.005
+gripper:
+  longest_valid_segment_fraction: 0.01
+  planner_configs:
+    - AnytimePathShortening
+    - SBL
+    - EST
+    - LBKPIECE
+    - BKPIECE
+    - KPIECE
+    - RRT
+    - RRTConnect
+    - RRTstar
+    - TRRT
+    - PRM
+    - PRMstar
+    - FMT
+    - BFMT
+    - PDST
+    - STRIDE
+    - BiTRRT
+    - LBTRRT
+    - BiEST
+    - ProjEST
+    - LazyPRM
+    - LazyPRMstar
+    - SPARS
+    - SPARStwo
+    - TrajOptDefault
+
