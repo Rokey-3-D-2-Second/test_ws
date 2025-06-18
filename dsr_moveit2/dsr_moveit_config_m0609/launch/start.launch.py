@@ -197,12 +197,12 @@ def generate_launch_description():
         arguments=["dsr_moveit_controller", "-c", "controller_manager",],
     )
 
-    gripper_controller_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        namespace=LaunchConfiguration('name'),
-        arguments=["gripper_controller", "-c", "controller_manager",],
-    )
+    # gripper_controller_spawner = Node(
+    #     package="controller_manager",
+    #     executable="spawner",
+    #     namespace=LaunchConfiguration('name'),
+    #     arguments=["gripper_controller", "-c", "controller_manager",],
+    # )
 
     # # Moveit2 config 
     rviz_node = OpaqueFunction(function=rviz_node_function)
@@ -240,7 +240,7 @@ def generate_launch_description():
         delay_rviz_after_joint_state_broadcaster_spawner,
         joint_state_broadcaster_spawner,
         dsr_moveit_controller_spawner,
-        gripper_controller_spawner, 
+        # gripper_controller_spawner, 
         control_node,
     ]
 
