@@ -24,3 +24,17 @@ dsr_moveit_controller:
       - joint_4
       - joint_5
       - joint_6
+
+gripper_controller:
+  ros__parameters:
+    joints:
+      - rg2_finger_joint1
+      - rg2_finger_joint2
+
+    command_interfaces:
+      - position
+      - velocity
+    
+    state_interfaces:
+      - position
+      - velocity
