@@ -59,6 +59,7 @@ def rviz_node_function(context):
         executable="move_group",
         # namespace=LaunchConfiguration('name'),
         output="screen",
+        arguments=['--ros-args', '--log-level', 'WARN'],
         parameters=[
             moveit_config.to_dict(),
         ],
