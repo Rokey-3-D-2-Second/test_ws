@@ -27,7 +27,10 @@ setup(
             "move_periodic = rokey.basic.move_periodic:main",
             "simple_move=rokey.basic.move:main",
             "simple_movesx=rokey.basic.movesx_test:main",
-            "data_recording=rokey.basic.data_recording:main"
+            "data_recording=rokey.basic.data_recording:main",
+
+            "gripper_action_server=rokey.gripper_action_server:main",
+            
         ],
     },
 )

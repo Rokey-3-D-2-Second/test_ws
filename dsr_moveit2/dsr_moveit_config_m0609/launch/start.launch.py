@@ -198,12 +198,17 @@ def generate_launch_description():
         arguments=["dsr_moveit_controller", "-c", "controller_manager",],
     )
 
-    # gripper_controller_spawner = Node(
-    #     package="controller_manager",
-    #     executable="spawner",
-    #     namespace=LaunchConfiguration('name'),
-    #     arguments=["gripper_controller", "-c", "controller_manager",],
-    # )
+    gripper_controller_spawner = Node(
+        # package="controller_manager",
+        # executable="spawner",
+        # namespace=LaunchConfiguration('name'),
+        # arguments=["gripper_controller", "-c", "controller_manager",],
+        package='rokey',  # 패키지명
+        executable='gripper_action_server',  # 실행 파일명
+        name='gripper_action_server',
+        # namespace=LaunchConfiguration('name'),
+        output='screen'
+    )
 
     # # Moveit2 config 
     rviz_node = OpaqueFunction(function=rviz_node_function)
@@ -240,8 +245,9 @@ def generate_launch_description():
         robot_controller_spawner,
         delay_rviz_after_joint_state_broadcaster_spawner,
         joint_state_broadcaster_spawner,
+        # delay_robot_controller_spawner_after_joint_state_broadcaster_spawner,
         dsr_moveit_controller_spawner,
-        # gripper_controller_spawner, 
+        gripper_controller_spawner, 
         control_node,
     ]
 

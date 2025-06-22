@@ -26,8 +26,6 @@
   <xacro:if value="${cr == 'blue'}">
      <xacro:include filename="$(find dsr_description2)/xacro/macro.m0609.blue.xacro" />
   </xacro:if>
-  <!-- RG2 Gripper Macro 포함 -->
-  <xacro:include filename="$(find dsr_description2)/xacro/rg2_macro.xacro"/>
 
   <xacro:m0609 namespace="$(arg namespace)"/>
 
@@ -54,6 +52,8 @@
     />
   </xacro:unless>
   
+  <!-- RG2 Gripper Macro 포함 -->
+  <xacro:include filename="$(find dsr_description2)/xacro/rg2_macro.xacro"/>
   <!-- RG2 그리퍼 매크로 호출 -->
   <xacro:rg2_gripper parent="link_6" name="rg2"/>
   

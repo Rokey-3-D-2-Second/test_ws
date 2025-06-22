@@ -192,5 +192,5 @@ gripper:
     - LazyPRMstar
     - SPARS
     - SPARStwo
-    - TrajOptDefault
+    # - TrajOptDefault
 
